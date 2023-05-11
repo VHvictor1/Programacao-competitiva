@@ -1,28 +1,30 @@
 #include <iostream>
- 
+#include <algorithm>
+
 using namespace std;
- 
+
 int main()
 {
-    int n, a, b;
-    cin >> n >> a >> b;
- 
-    int total = 0;
-    for (int i = 1; i <= n; i++)
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n; ++i)
+        cin >> a[i];
+
+    sort(a, a + n);
+
+    int dias = 0;
+    for (int k = 1; k <= n; ++k)
     {
-        int value = i;
-        int soma = 0;
-        while (value > 0)
-        {
-            soma += value % 10;
-            value /= 10;
-        }
-        if (soma >= a && soma <= b)
-        {
-            total += i;
-        }
+        int i;
+        while (i < n && a[i] < k)
+            i++;
+        if (i == n)
+            break;
+        ++dias;
+        a[i] = 0;
     }
- 
-    cout << total << endl;
+
+    cout << dias << '\n';
     return 0;
 }

@@ -1,35 +1,24 @@
-#include <bits/stdc++.h>
-#include <map>
-
+#include <iostream>
+#include <string>
+#include <set>
+ 
 using namespace std;
-
-int main()
-{
-    int n, p1, p2;
-    int x, y, preco;
-    scanf("%d %d %d", &n, &p1, &p2);
-    int menorCusto = 10000;
-    pair<int, int> menorPar;
-    int menorIndex;
-
-    vector<pair<pair<int, int>, int>> restaurantes;
-
-    for (int i = 0; i < n; i++)
-    {
-        scanf("%d %d %d", &x, &y, &preco);
-        restaurantes.push_back(make_pair(make_pair(x,y),preco));
+ 
+bool is_beautiful(int year) {
+    string ano = to_string(year);
+    set<char> digito(ano.begin(), ano.end());
+    return digito.size() == ano.size();
+}
+ 
+int main() {
+    int x;
+    cin >> x;
+ 
+    int year = x + 1;
+    while (!is_beautiful(year)) {
+        year++;
     }
-
-    for(int i=0; i<restaurantes.size(); i++){
-        int res = (abs(restaurantes.at(i).first.first - p1) + abs(restaurantes.at(i).first.second - p2)) * 2 + restaurantes.at(i).second;
-        if (res < menorCusto)
-        {
-            menorPar = restaurantes.at(i).first;
-            menorCusto = res;
-            menorIndex = i;
-        }
-    }
-    printf("%d %d\n", menorCusto, menorIndex + 1);
-
+ 
+    cout << year << endl;
     return 0;
 }
