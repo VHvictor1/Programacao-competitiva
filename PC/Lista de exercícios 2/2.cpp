@@ -6,57 +6,19 @@ int main()
 {
     int v, a, l;
     scanf("%d %d %d", &v, &a, &l);
-    int aux;
-    int i = 0;
-    int total = 0;
-    int k = 0;
-    int count = 0;
     queue<int> vec;
+    int x;
+    int total = 0;
 
-    while (i < v)
+    while (v > vec.size())
     {
-        cin >> aux;
-        vec.push(aux);
-        i++;
+        cin >> x;
+        vec.push(x);
     }
-
-    while (!vec.empty())
+    if (a == 1)
     {
-        if (a != 1)
+        while (!vec.empty())
         {
-            if (vec.front() > l)
-            {
-                k = 0;
-                total += 10;
-                vec.push(vec.front() - 2);
-                while (k < a)
-                {
-                    vec.pop();
-                    if(vec.empty()){
-                        break;
-                    }
-                    k++;
-                }
-                count += a - 1;
-            }
-            else
-            {
-                k = 0;
-                total += 5;
-                while (k < a)
-                {
-                    vec.pop();
-                    if(vec.empty()){
-                        break;
-                    }
-                    k++;
-                }
-                count += a - 1;
-            }
-        }
-        else
-        {
-
             if (vec.front() > l)
             {
                 total += 10;
@@ -65,13 +27,43 @@ int main()
             }
             else
             {
-                vec.pop();
                 total += 5;
+                vec.pop();
+            }
+        }
+    }
+    else
+    {
+        while (!vec.empty())
+        {
+            if (vec.front() > l)
+            {
+                total += 10;
+                vec.push(vec.front() - 2);
+                vec.pop();
+            }
+            else
+            {
+                total += 5;
+                vec.pop();
+            }
+
+            for (int i = 0; i < a - 1; i++)
+            {
+                if (vec.empty())
+                {
+                    break;
+                }
+                else
+                {
+                    total += 1;
+                    vec.pop();
+                }
             }
         }
     }
 
-    cout << total + count << endl;
+    cout << total << endl;
 
     return 0;
 }
